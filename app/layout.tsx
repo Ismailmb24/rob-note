@@ -38,7 +38,7 @@ export default function RootLayout({
             </div>
             <div className="flex items-center gap-4">
               <Link href="/dictionary" className="text-lg font-bold text-gray-800">Dictionary</Link>
-              <Link href="/grammar" className="text-lg font-bold text-gray-800">Corrector</Link>
+              <Link href="/enhancer" className="text-lg font-bold text-gray-800">Enhancer</Link>
             </div>
           </nav>
 

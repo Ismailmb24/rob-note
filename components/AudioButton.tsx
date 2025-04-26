@@ -1,6 +1,6 @@
 "use client";
 
-import type { item } from "@/app/dictionary/page";
+import type { item } from "./WordList";
 import { AudioLinesIcon } from "lucide-react";
 
 export default function AudioButton({ item }: { item: item }) {
@@ -10,6 +10,7 @@ export default function AudioButton({ item }: { item: item }) {
             e.stopPropagation();
             e.preventDefault();
             const audio = document.getElementById(item.word) as HTMLAudioElement;
+            if (!audio) return;
             audio.play();
         }}>
             <AudioLinesIcon className="w-10 h-10 text-indigo-800 hover:text-indigo-900" />

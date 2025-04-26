@@ -13,14 +13,14 @@ export default function Home() {
             <Link href="/dictionary" className="font-black">Get Started</Link>
           </Button>
         </div>
-        <div className="mt-10 p-5 lg:p-0">
+        <div className="mt-10 p-5 xl:p-0">
           <h2 className="text-2xl lg:text-3xl font-black">Explore Our Tools</h2>
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 mt-5">
             <Link href="/dictionary">
               <div className="flex w-full items-center justify-center gap-4 p-5 shadow-xl rounded-xl border-2 border-gray-500">
                 <Book className="w-20 h-20 text-indigo-900" />
                 <div>
-                  <h2 className="text-3xl font-bold">AI Dictionry</h2>
+                  <h2 className="text-xl lg:text-2xl font-bold">AI Dictionry</h2>
                   <p className="text-lg">Get the meaning of one or group of word with AI examples.</p>
                 </div>
               </div>
@@ -30,7 +30,7 @@ export default function Home() {
               <div className="flex w-full items-center justify-center gap-4 p-5 shadow-xl rounded-xl border-2 border-gray-500">
                 <Stars className="w-20 h-20 text-indigo-900" />
                 <div>
-                  <h2 className="text-3xl font-bold">AI Grammar Corrector</h2>
+                  <h2 className="text-xl lg:text-2xl font-bold">AI Grammar Enhancer</h2>
                   <p className="text-lg">Get the meaning of one or group of word with AI examples.</p>
                 </div>
               </div>

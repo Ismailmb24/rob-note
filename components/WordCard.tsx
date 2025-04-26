@@ -1,4 +1,4 @@
-import { item } from "@/app/dictionary/page";
+import { item } from "./WordList";
 import AudioButton from "./AudioButton";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "./ui/card";
@@ -8,18 +8,16 @@ export default function WordCard({ item }: { item: item}) {
     return (
         <Link href={`/${item.word}`} className="no-underline "> 
             <Card key={item.word} className="p-2 py-3 mt-10 mx-5">
-                <CardHeader >
-                    <div className="flex">
-                        {
-                            item.audio && <audio 
-                            src={ item.audio} 
-                            className="invisble" 
-                            id={item.word} />
-                        }
-                        <AudioButton item={item} />
-                        <h1 className="text-2xl FONT-THIN ml-4">{item.word}</h1>
-                    </div>
-                    <div>
+                <CardHeader className="flex items-center">
+                    {
+                        item.audio && <audio 
+                        src={ item.audio} 
+                        className="invisble" 
+                        id={item.word} />
+                    }
+                    <AudioButton item={item} />
+                    <div className="ml-4">
+                        <h1 className="text-2xl">{item.word}</h1>
                         {
                             item.meanings.map((meaning : any, index: number) => (
                                 <span 
@@ -30,7 +28,6 @@ export default function WordCard({ item }: { item: item}) {
                             ))
                         }
                     </div>
-                    
                 </CardHeader>
                 <CardContent className="text-gray-500">
                     <p 
