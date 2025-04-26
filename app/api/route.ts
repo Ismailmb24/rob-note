@@ -1,12 +1,12 @@
-import { getWordMeaning } from "@/lib/utils";
+import { getWordMeaning } from "@/lib/helpers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.nextUrl);
     const search = searchParams.get("search");
-    console.log("search !!!", searchParams);
 
-    if (!search) {
+    //if there is no search term return error
+    if (!search || search === "undefined") {
         return NextResponse.json({
             error: "Please provide a search term.",
         }, { status: 400 });

@@ -1,4 +1,4 @@
-import { getAiCorrection } from "@/lib/utils";
+import { getAiCorrection } from "@/lib/helpers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
