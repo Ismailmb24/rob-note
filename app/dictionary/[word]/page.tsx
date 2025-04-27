@@ -1,3 +1,4 @@
+import AiExample from "@/components/AiExample";
 import Definition, { DefinitionProps } from "@/components/Definition";
 import WordHead from "@/components/WordHead";
 
@@ -32,6 +33,7 @@ export default async function Page({ params }: { params: Promise<{ word: string 
                                     }
                                 </div>   
                             </div>
+                            <AiExample word={word} />
                         </div> 
                     )
             }

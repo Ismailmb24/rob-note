@@ -55,7 +55,7 @@ export const getAiWordExamples = async (word: string) => {
                             "example 3"
                         ]
                         }
-                        Now: give me 3 example of sentence with word ${word} only` }],
+                        Now: give me 5 example of sentence with word ${word} only` }],
                 }],
             }),
         }
