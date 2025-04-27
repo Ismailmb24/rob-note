@@ -3,13 +3,13 @@
 import type { item } from "./WordList";
 import { AudioLinesIcon } from "lucide-react";
 
-export default function AudioButton({ item }: { item: item }) {
+export default function AudioButton({ data }: { data: item }) {
     
     return (
         <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.stopPropagation();
             e.preventDefault();
-            const audio = document.getElementById(item.word) as HTMLAudioElement;
+            const audio = document.getElementById(data.word) as HTMLAudioElement;
             if (!audio) return;
             audio.play();
         }}>
