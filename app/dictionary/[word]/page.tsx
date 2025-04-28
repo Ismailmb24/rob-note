@@ -1,5 +1,5 @@
 import AiExample from "@/components/AiExample";
-import Definition, { DefinitionProps } from "@/components/Definition";
+import Definition, { MeaningProps } from "@/components/Definition";
 import WordHead from "@/components/WordHead";
 
 export default async function Page({ params }: { params: Promise<{ word: string }> }) {
@@ -25,10 +25,10 @@ export default async function Page({ params }: { params: Promise<{ word: string 
                             <div className="my-10">
                                 <div >
                                     {
-                                        data.meanings.map((definition: DefinitionProps) => (
+                                        data.meanings.map((meaning: MeaningProps) => (
                                             <Definition
-                                            key={definition.partOfSpeech}
-                                            definition={definition} />
+                                            key={meaning.partOfSpeech}
+                                            meaning={meaning} />
                                         ))
                                     }
                                 </div>   

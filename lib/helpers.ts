@@ -1,3 +1,5 @@
+import { MeaningProps } from "@/components/Definition";
+
 //our model API key
 const apiKey = process.env.MODEL_API_KEY;
 
@@ -18,7 +20,7 @@ export const getWordMeaning = async (wordTerm: string) => {
         word,
         phonetic,
         audio,
-        meanings: meanings.map((item: {partOfSpeech: string, definitions: any[]}) => ({
+        meanings: meanings.map((item: {partOfSpeech: string, definitions: MeaningProps["definitions"]}) => ({
                 partOfSpeech: item.partOfSpeech,
                 definitions: item.definitions.map((definition) => ({
                         definition: definition.definition,
@@ -30,12 +32,16 @@ export const getWordMeaning = async (wordTerm: string) => {
 
 // Function to parse the AI response
 // This function extracts the JSON part from the AI response string
-export const parseAiResponse = (response: any) => {
+export const parseAiResponse = (response: string) => {
     //Parse the response string to JSON
-    const jsonText = response?.match(/```json([\s\S]*?)```/)[1].trim();
-    const json = JSON.parse(jsonText);
+    const match = response.match(/```json([\s\S]*?)```/);
+    if (!match || !match[1]) {
+        return null;
+    }
+    const jsonText = match[1].trim();
+    const parsedJson = JSON.parse(jsonText);
 
-    return json;
+    return parsedJson;
 }
 
 // Function to get word examples from the AI
@@ -67,8 +73,10 @@ export const getAiWordExamples = async (word: string) => {
     }
     
     const examples = data?.candidates[0]?.content.parts[0]?.text;
-    console.log("examples !!!", examples);
     const parsedExamples = parseAiResponse(examples);
+    if (!parsedExamples || !parsedExamples.examples) {
+        return null;
+    }
     return parsedExamples;
 }
 

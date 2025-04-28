@@ -1,8 +1,9 @@
 import WordCard from "@/components/WordCard";
+import { MeaningProps } from "./Definition";
 
 export interface item {
     word: string;
-    meanings: any[];
+    meanings: MeaningProps[];
     audio: string;
 }
 
@@ -24,11 +25,11 @@ export default async function WordSearchResult({ search }: { search: string }) {
                 : (
                     <div className="mb-10">
                         <h1 className="text-2xl font-bold mt-10 mx-5">
-                            Results for "{
+                            Results for &quot;{
                                 search.length < 20 ?
                                 search :
                                 search.slice(0, 20) + "..."
-                            }"
+                            }&quot;
                         </h1>
                         {
                             data.map((item: item) => (
