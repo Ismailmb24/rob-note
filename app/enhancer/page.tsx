@@ -21,7 +21,7 @@ export default function Page() {
         const form = e.currentTarget as HTMLFormElement;
         const formData = new FormData(form);
         
-        const res = await fetch(`http://localhost:3000/api/ai/enhancer`, {
+        const res = await fetch(`${process.env.MY_API_URL}/ai/enhancer`, {
             method: "POST",
             body: formData,
         });

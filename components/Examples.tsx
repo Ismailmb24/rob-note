@@ -28,7 +28,7 @@ export default function Examples({ word, toggle }: { word: string, toggle: boole
     }, [toggle, word]);
 
     if (loading) return (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center h-50">
             <p className="text-slate-800">Loading...</p>
         </div>
     );
