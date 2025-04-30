@@ -26,7 +26,7 @@ export default function Home() {
               </div>
             </Link>
             
-            <Link href="/grammar">
+            <Link href="/enhancer">
               <div className="flex w-full items-center justify-center gap-4 p-5 shadow-xl rounded-xl border-2 border-gray-500">
                 <Stars className="w-20 h-20 text-indigo-900" />
                 <div>

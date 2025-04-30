@@ -10,7 +10,7 @@ export default function Definition({ meaning }: { meaning: MeaningProps}) {
     
     return (
         <div className="flex flex-col gap-2 mt-10">
-            <h2 className="font-thin text-gray-300">[{meaning?.partOfSpeech}]</h2>
+            <h2 className="font-thin text-gray-400">[{meaning?.partOfSpeech}]</h2>
             <div className="text-slate-800">
                 {
                     meaning?.definitions.map((definition: MeaningProps["definitions"][0], index: number) => (

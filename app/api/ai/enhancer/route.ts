@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     //get the client requested note from the request body
-    const { note } = await request.json();
+    const formData = request.formData();
+    const note = (await formData).get("note") as string;
 
     //if there is no note in the request body return error
     if (!note) {

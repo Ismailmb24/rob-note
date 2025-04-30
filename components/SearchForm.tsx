@@ -1,7 +1,7 @@
 export default function SearchForm() {
     return (
         <div className="mt-5">
-            <form action="/dictionary" method="GET" className="w-11/12 md:w-2/3 mx-auto">
+            <form action="/dictionary" method="GET" className="w-11/12 md:w-2/3 mx-auto" noValidate autoComplete="off">
                 <input 
                 name="search" 
                 type="text" 

@@ -7,7 +7,6 @@ export const getWordMeaning = async (wordTerm: string) => {
     //fetch word meaning from the API
     const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordTerm}`);
     const data = await res.json();
-    console.log("data !!!", res);
     
     //if the word is not found return null
     if (res.status === 404) {
@@ -93,7 +92,7 @@ export const getAiCorrection = async (text: string) => {
                 contents: [{
                     parts: [{ text: `Respond in the following JSON format:
                         {
-                        "Correction": "corrected text",
+                        "correction": "corrected text",
                         }
                         Now: Correct the following text in a right grammar and spelling:${text}` }],
                 }],
@@ -101,7 +100,7 @@ export const getAiCorrection = async (text: string) => {
         }
     );
     const data = await res.json();
-    console.log("data !!!", data);
+    console.log("real Data!!", data?.candidates);   
 
     if (res.status !== 200) {
         return null;

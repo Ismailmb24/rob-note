@@ -8,7 +8,7 @@ export default function WordListSkeleton({ search }: { search: string }) {
                 Results for &quot;{
                     search?.length < 20 ?
                     search :
-                    search.slice(0, 20) + "..."
+                    search?.slice(0, 20) + "..."
                 }&quot;
             </h1>
             {
