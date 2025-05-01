@@ -11,7 +11,7 @@ export default async function Page(
     return (
         <main className="max-w-6xl mx-auto">
             <SearchForm />
-            <Suspense fallback={ <WordListSkeleton search={search} /> }>
+            <Suspense fallback={ <WordListSkeleton /> }>
                 <WordList search={search} />
             </Suspense>
         </main>
