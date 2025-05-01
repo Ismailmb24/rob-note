@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Examples({ word, toggle }: { word: string, toggle: boolean }) {
@@ -13,7 +14,6 @@ export default function Examples({ word, toggle }: { word: string, toggle: boole
     const [error, setError] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log("Fetching data...", word);
         const fetchData = async () => {
             const res = await fetch(`/api/ai/examples?word=${word}`);
             const data = await res.json();
@@ -22,14 +22,13 @@ export default function Examples({ word, toggle }: { word: string, toggle: boole
             }
             setData(data);
             setLoading(false);
-            console.log("Data fetched:", data);
         };
         fetchData();
     }, [toggle, word]);
 
     if (loading) return (
         <div className="flex justify-center items-center h-50">
-            <p className="text-slate-800">Loading...</p>
+            <Loader className="animate-spin text-indigo-900" />
         </div>
     );
 
