@@ -1,6 +1,6 @@
 import WordCardSkeleton from "./WordCardSkeleton";
 
-export default function WordListSkeleton({ search }: { search: string }) {
+export default function WordListSkeleton() {
 
     return (
         <div className="mb-10">
