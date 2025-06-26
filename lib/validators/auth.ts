@@ -31,5 +31,5 @@ export const SignInSchema = z.object({
     )
 })
 
-export type singInInput = z.infer<typeof SignInSchema>
-export type singUpInput = z.infer<typeof SignUpSchema>
+export type signInInput = z.infer<typeof SignInSchema>
+export type signUpInput = z.infer<typeof SignUpSchema>

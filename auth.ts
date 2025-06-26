@@ -1,9 +1,10 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
-import Google from "next-auth/providers/google"
+import Google from "next-auth/providers/google";
 import { prisma } from "./lib/prisma";
 import Credentials from "next-auth/providers/credentials";
 import { SignInSchema, singInInput } from "./lib/validators/auth";
+import bcrypt from "bcrypt";
 
 export const {handlers, signIn, signOut, auth} = NextAuth({
     adapter: PrismaAdapter(prisma),
@@ -33,7 +34,38 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
                 const user = await prisma.user.findUnique({
                     where: { email },
                 })
+
+                if (!user) {
+                    throw new Error("User not found");
+                }
+
+                // Here you would typically check the password against a hashed password
+                const isValidPassword = await bcrypt.compare(password, user.password as string);
+
+                if (!isValidPassword) {
+                    throw new Error("Invalid password");
+                }
+
+                return user;
             }
         })
-    ]
+    ],
+    pages: {
+        signIn: "/signin",
+        newUser: "/signup",
+
+    },
+    session: {
+        strategy: "jwt",
+    },
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) token.id = user.id;
+            return token;
+        },
+        async session({ session, token }) {
+            if (token) session.user.id = token.id as string;
+            return session;
+        }
+    },
 })
