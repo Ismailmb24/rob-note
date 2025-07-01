@@ -1,17 +1,19 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
+import { FaGoogle } from "react-icons/fa"
 
 export default function SignInWithGoogle() {
     
     return (
         <Button 
         type="submit" 
-        className="w-full" 
+        className="w-full border-slate-500 cursor-pointer" 
         variant="outline"
         onClick={() => signIn("google", { callbackUrl: "/" })} // Redirect to home after sign in
         >
-            Sign in with google
+            <FaGoogle />
+            Sign in with Google
         </Button>
     )
 }

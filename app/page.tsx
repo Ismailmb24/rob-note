@@ -40,7 +40,7 @@ export default function Home() {
         </div>
         
       </main>
-      <footer className="mt-10 p-10 bg-indigo-900 text-white">
+      <footer className="mt-10 p-10 bg-indigo-800 text-white">
         <div className="mt-5 text-center">
           <p className="text-sm">© 2023 AI Dictionary. All rights reserved.</p>
           <p className="text-sm">Made ❤️ by MBT Project series</p>
