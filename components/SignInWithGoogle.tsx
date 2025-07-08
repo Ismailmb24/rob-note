@@ -10,7 +10,10 @@ export default function SignInWithGoogle() {
         type="submit" 
         className="w-full border-slate-500 cursor-pointer" 
         variant="outline"
-        onClick={() => signIn("google", { callbackUrl: "/" })} // Redirect to home after sign in
+        onClick={() => signIn("google", { 
+            redirect: true,
+            redirectTo: "/dictionary" // Redirect to dictionary page after sign in
+         })} // Redirect to home after sign in
         >
             <FaGoogle />
             Sign in with Google

@@ -1,8 +1,16 @@
+import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { Book, Stars } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+      // This page is public and does not require authentication
+      // So we don't need it while the user is signed in
+      // This redirect user if he is already signed in
+      const session = await auth();
+      if (session?.user) redirect("/dictionary");
+      
   return (
     <>
       <main className="max-w-6xl mx-auto">

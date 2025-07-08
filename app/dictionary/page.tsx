@@ -14,7 +14,7 @@ export default async function Page(
     const { search } = await searchParams;
 
     return (
-        <main className="max-w-6xl mx-auto">
+        <main className="max-w-5xl mx-auto">
             <SearchForm />
             <Suspense fallback={ <WordListSkeleton /> }>
                 <WordList search={search} />

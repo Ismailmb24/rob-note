@@ -6,7 +6,6 @@ import WordHead from "./WordHead";
 export default function WordCard({ item }: { item: item}) {
     
     return (
-        <Link href={`/dictionary/${item.word}`} className="no-underline "> 
             <Card key={item.word} className="p-2 py-3 mt-10 mx-5">
                 <CardHeader className="flex items-center">
                     <WordHead data={item} />
@@ -18,6 +17,5 @@ export default function WordCard({ item }: { item: item}) {
                     </p>
                 </CardContent>
             </Card>
-        </Link>
     );
 }

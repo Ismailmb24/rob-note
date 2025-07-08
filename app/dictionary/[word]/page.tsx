@@ -3,6 +3,7 @@ import Definition, { MeaningProps } from "@/components/Definition";
 import WordHead from "@/components/WordHead";
 import { requireAuth } from "@/lib/require-auth";
 
+
 export default async function Page({ params }: { params: Promise<{ word: string }> }) {
     // This page requires log in
     // If user is not loged in he will be redirected to sing in page 
@@ -13,7 +14,7 @@ export default async function Page({ params }: { params: Promise<{ word: string 
     const data = await res.json();
 
     return (
-        <main className="px-5 xl:p-0 max-w-6xl mx-auto">
+        <main className="px-5 xl:p-0 max-w-4xl mx-auto">
             {
                 res.status !== 200
                     ? (

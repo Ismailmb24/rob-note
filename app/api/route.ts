@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     //if there is no search term return error
     if (!search || search === "undefined") {
         return NextResponse.json({
-            error: "Please provide a search term.",
+            error: "Please provide a search term",
         }, { status: 400 });
     }
     
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
         const wordMeaning = await getWordMeaning(searchTerms[0]);
         if (!wordMeaning) {
             return NextResponse.json({
-                error: "No results found.",
+                error: "No results found",
             }, { status: 404 });
         }
         

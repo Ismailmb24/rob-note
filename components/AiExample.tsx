@@ -5,6 +5,7 @@ import { useState } from "react";
 import RegenerateExample from "./RegenerateExample";
 import { Separator } from "./ui/separator";
 import Examples from "./Examples";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 export default function AiExamples({ word }: { word: string }) {
     
@@ -17,7 +18,15 @@ export default function AiExamples({ word }: { word: string }) {
                     <StarsIcon className="w-10 h-10 text-indigo-900" />
                     <p className="text-slate-900">AI Examples</p>
                 </h2>
-                <RegenerateExample toggle={setToggle} />
+                <Tooltip>
+                    <TooltipTrigger className="cursor-pointer">
+                        <RegenerateExample toggle={setToggle} />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p className="text-sm">Regenerate</p>
+                    </TooltipContent>
+                </Tooltip>
+                
             </div>
             <Separator className="my-4 bg-gray-400 w-full" />
             <Examples word={word} toggle={toggle} />
