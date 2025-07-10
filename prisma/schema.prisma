@@ -82,6 +82,9 @@ model Note {
   id            String       @id @default(cuid())
   originalText  String       @map("original_text")
   enhacedText   String       @map("enhanced_text")
+  language      String?
+  turn          String?
+  prompt        String?
   sessionId     String       @map("session_id")
   session       NoteSession  @relation(fields: [sessionId], references: [id])
 

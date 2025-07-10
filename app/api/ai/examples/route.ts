@@ -1,4 +1,4 @@
-import { getAiWordExamples } from "@/lib/getFromAi"
+import { getAiWordExamples } from "@/lib/services/getFromAi"
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {

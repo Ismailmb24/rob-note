@@ -1,7 +1,18 @@
-import { getAiCorrection } from "@/lib/getFromAi";
+import { auth } from "@/auth";
+import { getAiCorrection } from "@/lib/services/getFromAi";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
+    //check if user is authenticated
+    const session = await auth();
+
+    //if there is no authenticated user return user not authenticated
+    if (!session?.user) {
+        return NextResponse.json({
+            error: "User not authenticated.",
+        }, { status: 401 });
+    }
+
     //get the client requested note from the request body
     const formData = request.formData();
     const note = (await formData).get("note") as string;
@@ -24,12 +35,14 @@ export async function POST(request: NextRequest) {
 
     //get the correction from the ai
     const correction = await getAiCorrection(inputedData);
+
+    //if there is not correction responce return error
     if (!correction) {
         return NextResponse.json({
             error: "Something went wrong.",
         }, { status: 500 });
     }
 
-    //Send the correction to the client
-    return NextResponse.json(correction);
+    //if there is correction save it to data base
+    
 }
