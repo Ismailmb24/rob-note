@@ -1,14 +1,12 @@
 import { correction } from "@/app/enhancer/page";
-import { Loader } from "lucide-react";
+import {  CornerDownRight, Languages, Loader, Repeat } from "lucide-react";
 
 export default function Enhancement({
     correction,
-    outputWordsAmount,
     loading,
     error,
 }: {
     correction: correction | null;
-    outputWordsAmount: number | undefined;
     loading: boolean;
     error: boolean;
 }) {
@@ -26,20 +24,27 @@ export default function Enhancement({
         </div>
     );
 
-    // if (!correction) return (
-    //     <div className="text-center mt-10 flex flex-col justify-center items-center">
-    //         <h1 className="text-2xl font-bold">This is where </h1>
-    //         <p className="text-gray-500">Please try again later.</p>
-    //     </div>
-    // );
-    
     return (
         <>
-            <div className="h-52 lg:h-80 border-b border-gray-300">
-                <p className="">{correction?.correction}</p>
-            </div>
-            <div>
-                words: {outputWordsAmount}
+            <div className="w-full p-5">
+                <div className="w-4/5 flex gap-2 font-light relative right-0 text-sm text-slate-400 mb-2">
+                    <CornerDownRight /> 
+                    <div>
+                        <p className="italic">{correction?.correction.substring(0, 100)}...</p>
+                        <div className="flex gap-5">
+                            <div className="flex gap-1 items-center">
+                                <Languages size={16} />
+                                <p>English</p>
+                            </div>
+                            <div className="flex gap-1 items-center">
+                                <Repeat size={16} />
+                                <p>Formal</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <p className="w-full">{correction?.correction}</p>
             </div>
         </>
     )

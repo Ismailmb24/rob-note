@@ -1,4 +1,4 @@
-import { getWordMeaning } from "@/lib/helpers";
+import { getWordMeaning } from "@/lib/getWord";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {

@@ -45,14 +45,15 @@ model Session {
 }
  
 model User {
-  id            String    @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
+  email         String?       @unique
+  emailVerified DateTime?     @map("email_verified")
   image         String?
   password      String?
   accounts      Account[]
   sessions      Session[]
+  noteSessions  NoteSession[]  // Added relation field
  
   @@map("users")
 }
@@ -64,4 +65,25 @@ model VerificationToken {
  
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+model NoteSession {
+  id        String      @id @default(cuid())
+  title     String?
+  userId    String      @map("user_id")
+  notes     Note[]
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  @@map("notesessions")
+}
+
+model Note {
+  id            String       @id @default(cuid())
+  originalText  String       @map("original_text")
+  enhacedText   String       @map("enhanced_text")
+  sessionId     String       @map("session_id")
+  session       NoteSession  @relation(fields: [sessionId], references: [id])
+
+  @@map("notes")
 }

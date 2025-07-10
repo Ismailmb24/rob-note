@@ -2,6 +2,13 @@
 
 import Enhancement from "@/components/Enhancement";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { SelectTrigger } from "@radix-ui/react-select";
+import { Languages, Pen, Repeat, Send, SendHorizonal, Sparkles, Stars, Terminal } from "lucide-react";
+import { Rubik } from "next/font/google";
 import { useState } from "react";
 
 export interface correction {
@@ -29,13 +36,10 @@ export default function Page() {
         const formData = new FormData(form);
 
         const note = formData.get("note") as string;
-        console.log("Note", note);
-        if (note.length < 1) {
-            setNoValue(true);
-            setLoading(false);
-            return;
-        }
-    
+        const language = formData.get("language");
+        const turn = formData.get("turn");
+        
+        
         const res = await fetch(`/api/ai/enhancer`, {
             method: "POST",
             body: formData,
@@ -47,71 +51,106 @@ export default function Page() {
         if (res.status !== 200) {
             setError(true);
         }
+        // this set enhaced note loading to false to remove the loading ui
         setLoading(false);
-        setNoValue(false);
-        setToolow(false);
-        setToolong(false);
     }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const target = e.target as HTMLTextAreaElement;
         const value = target.value;
         setFormValue(value);
-        setNoValue(false);
-
-        if (value.length < 5) {
-            setToolow(true);
-            setLoading(false);
-            return;
-        }
-
-        if (value.length > 500) {
-            setToolong(true);
-            setLoading(false);
-            return;
-        }
-
-        setToolow(false);
-        setToolong(false);
     }
 
     
     return (
-        <main className="max-w-6xl mx-auto px-4 lg:px-0 py-10">
-            <div className="flex flex-col lg:flex-row gap-4 border border-gray-300 rounded-lg">
+        <main className="w-full flex flex-col lg:flex-row">
+            <div className="flex flex-col w-full lg:w-2/3">
+                <div className="text-slate-800">
+                    <Enhancement 
+                    correction={correction} 
+                    loading={loading}
+                    error={error} />
+                </div>
+            </div>
+
+            <div>
+                <Separator orientation="vertical"/>
+            </div>
+            
+            <div className="flex flex-col w-full lg:w-1/3 lg:h-screen fixed bottom-1 lg:static">
                 <form 
                 action="/" 
                 onSubmit={handleFormSubmission}
-                className="p-4 lg:w-1/2">
-                    <textarea name="note" 
-                    className="w-full h-52 lg:h-80 border-b border-gray-300 resize-none rounded-lg focus:outline-none" 
+                className="p-4 w-full h-full">
+                    <Textarea name="note" 
+                    className="w-full max-h-52 lg:h-10/12 lg:max-h-10/12  border-b border-gray-300 resize-none rounded-lg focus:outline-none" 
                     placeholder="Type your text here..."
-                    onChange={handleInputChange}></textarea>
-                    {noValue && <p className="text-red-500 text-sm mt-2">Please enter a text</p>}
-                    {toolow && <p className="text-red-500 text-sm mt-2">Text is too short</p>}
-                    {toolong && <p className="text-red-500 text-sm mt-2">Text is too long</p>}
-                    <div className="flex justify-between">
-                        <p>Words: {inputWordAmount}</p>
+                    onChange={handleInputChange}
+                    ></Textarea>
+                    <div className="flex justify-between mt-5 items-center">
+                        <div className="flex gap-5">
+                            <Select name="language" defaultValue="default">
+                                <SelectTrigger>
+                                    <Tooltip>
+                                        <TooltipTrigger>
+                                            <Languages className="h-4 w-4" />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p>Language</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="default">Default</SelectItem>
+                                    <SelectItem value="englist">English</SelectItem>
+                                    <SelectItem value="arabic">Arabic</SelectItem>
+                                    <SelectItem value="hausa">Hausa</SelectItem>
+                                    <SelectItem value="chinese">Chinese</SelectItem>
+                                    <SelectItem value="hindie">Hindie</SelectItem>
+                                    <SelectItem value="france">France</SelectItem>
+                                </SelectContent>
+                            </Select>
+
+                            <Select name="turn" defaultValue="default">
+                                <SelectTrigger>
+                                    <Tooltip>
+                                        <TooltipTrigger>
+                                            <Repeat className="h-4 w-4" />  
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p>Turn</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="default">Default</SelectItem>
+                                    <SelectItem value="formal">Formal</SelectItem>
+                                    <SelectItem value="casual">Casual</SelectItem>
+                                </SelectContent>
+                            </Select>
+                            
+                             <Tooltip>
+                                <TooltipTrigger>
+                                    <Terminal className="h-4 w-4" />
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>Custom prompt</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </div>
                         <div>
                             <Button 
-                            className="bg-indigo-800 hover:bg-indigo-900 rounded-full" 
-                            type="submit">
-                                Ehance
+                            variant="secondary"
+                            className="rounded-full" 
+                            type="submit"
+                            disabled={!formValue}>
+                                <SendHorizonal className="text-indigo-500" />
                             </Button>
                         </div>
                     </div>
                 </form>
-                    
-                <div className="text-slate-800 rounded-lg p-4 lg:w-1/2 border-t lg:border-t-0 lg:border-l border-gray-300">
-                    <Enhancement 
-                    correction={correction} 
-                    outputWordsAmount={outputWordsAmount}
-                    loading={loading}
-                    error={error} />
-                </div>
-                
             </div>
-            
+
         </main>
     )
 }

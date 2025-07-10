@@ -1,33 +1,11 @@
-import { MeaningProps } from "@/components/Definition";
+export type inputedDataTypes = {
+    note: string, 
+    language: string, 
+    turn: string
+}
 
 //our model API key
 const apiKey = process.env.MODEL_API_KEY;
-
-export const getWordMeaning = async (wordTerm: string) => {
-    //fetch word meaning from the API
-    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordTerm}`);
-    const data = await res.json();
-    
-    //if the word is not found return null
-    if (res.status === 404) {
-        return null;
-    }
-    
-    //if the word is found return the meaning
-    const {word, phonetic, phonetics: [{ audio }], meanings} = data[0];
-    return {
-        word,
-        phonetic,
-        audio,
-        meanings: meanings.map((item: {partOfSpeech: string, definitions: MeaningProps["definitions"]}) => ({
-                partOfSpeech: item.partOfSpeech,
-                definitions: item.definitions.map((definition) => ({
-                        definition: definition.definition,
-                        example: definition.example,
-                })),
-        })),
-    }
-}
 
 // Function to parse the AI response
 // This function extracts the JSON part from the AI response string
@@ -82,19 +60,23 @@ export const getAiWordExamples = async (word: string) => {
 // Function to get AI correction for a given text
 // This function sends a request to the AI model to correct the grammar and spelling of the provided text
 // and returns the corrected text in JSON format.
-export const getAiCorrection = async (text: string) => {
+export const getAiCorrection = async (
+    {note, language, turn}: inputedDataTypes
+) => {
     const res = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
         {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 contents: [{
-                    parts: [{ text: `Respond in the following JSON format:
-                        {
-                        "correction": "corrected text",
-                        }
-                        Now: Correct the following text in a right grammar and spelling:${text}` }],
+                    parts: [{
+                        text: `You are a helpful assistant. Please correct the following text for grammar and spelling in ${language} language, using the ${turn} turn. Respond only with a JSON object in this format:
+                            {
+                            "correction": "corrected text"
+                            }
+                            Text to correct: ${note}`
+                    }],
                 }],
             }),
         }

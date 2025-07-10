@@ -1,4 +1,4 @@
-import { BookCheck } from "lucide-react";
+import { NotepadText,} from "lucide-react";
 
 export interface MeaningProps {
     partOfSpeech: string;
@@ -20,7 +20,7 @@ export default function Definition({ meaning }: { meaning: MeaningProps}) {
                 ) => (
                     <div key={index} className="flex flex-col gap-2 mt-2 my-8">
                             <p className="text-slate-800">
-                                <BookCheck size={14} className="inline-block mr-2" /> 
+                                <NotepadText size={14} className="inline-block mr-2" /> 
                                 {definition.definition}
                             </p>
                             <ul className="list-disc list-inside">
