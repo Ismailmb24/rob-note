@@ -1,9 +1,4 @@
-export type inputedDataTypes = {
-    note: string, 
-    language: string, 
-    turn: string
-}
-
+import { NoteTypes } from "./note";
 //our model API key
 const apiKey = process.env.MODEL_API_KEY;
 
@@ -60,24 +55,41 @@ export const getAiWordExamples = async (word: string) => {
 // Function to get AI correction for a given text
 // This function sends a request to the AI model to correct the grammar and spelling of the provided text
 // and returns the corrected text in JSON format.
-export const getAiCorrection = async (
-    {note, language, turn}: inputedDataTypes
-) => {
+export const getAiCorrection = async ({
+    originalText,
+    language, 
+    turn,
+    prompt
+}: NoteTypes) => {
+    // Ai query
+    const contents = !prompt 
+    ? ([{
+        parts: [{
+            text: `You are a helpful assistant. Please correct the following text for grammar and spelling in ${language} language, using the ${turn} turn. Respond only with a JSON object in this format:
+                {
+                "correction": "corrected text in clear and clean markdown format"
+                }
+                Text to correct: ${originalText}`
+        }],
+    }])
+    : ([{
+        parts: [{
+            text: `You are a helpful assistant. Please correct the following text for grammar and spelling using this prompt ${prompt}. Respond only with a JSON object in this format:
+                {
+                "correction": "corrected text in clear and clean markdown format"
+                }
+                Text to correct: ${originalText}`
+        }],
+    }]);
+    console.log("Custommm!!: ", prompt)
+
     const res = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                contents: [{
-                    parts: [{
-                        text: `You are a helpful assistant. Please correct the following text for grammar and spelling in ${language} language, using the ${turn} turn. Respond only with a JSON object in this format:
-                            {
-                            "correction": "corrected text"
-                            }
-                            Text to correct: ${note}`
-                    }],
-                }],
+                contents
             }),
         }
     );

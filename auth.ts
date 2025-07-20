@@ -42,7 +42,7 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
                 // Here you would typically check the password against a hashed password
                 const isValidPassword = await bcrypt.compare(password, user.password as string);
 
-                if (!isValidPassword) {
+                if (!isValidPassword || !user.emailVerified) {
                     return null; // User not found
                 }
 

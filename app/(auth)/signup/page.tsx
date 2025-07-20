@@ -8,8 +8,10 @@ import { Separator } from "@/components/ui/separator";
 import { redirectIfAuth } from "@/lib/redirect-if-auth";
 import { signUpInput, SignUpSchema } from "@/lib/validators/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CircleCheck, Mail } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { redirect, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "sonner";
@@ -21,6 +23,9 @@ export default function Page() {
     redirectIfAuth();
 
     const [ authError, setAuthError ] = useState<string | null>(null);
+    const searchParams = useSearchParams();
+    const verification = searchParams.get("verification");
+    console.log("verify: ", verification);
     
 
     const {
@@ -58,15 +63,39 @@ export default function Page() {
 
         // Sign up successful
         const user = await res.json();
-        console.log("User signed up successfully:", user);
 
-        // Automatically sign in the user after successful sign-up
-        signIn("credentials", {
-            email: email,
-            password: password,
-            redirect: true,
-            redirectTo: "/dictionary"
-        });
+        //redirect user to email verification message page
+        redirect("/signup?verification=pending");
+        // // Automatically sign in the user after successful sign-up
+        // signIn("credentials", {
+        //     email: email,
+        //     password: password,
+        //     redirect: true,
+        //     redirectTo: "/dictionary"
+        // });
+    }
+
+    if(verification === "pending") {
+        return(
+            <div className="flex flex-col items-center justify-center h-[90vh]">
+                    <Mail className="text-indigo-800" size={50} />
+                    <h1>Check your email to verify your Account</h1>
+            </div>
+        );
+    }
+
+    if(verification === "success") {
+        return(
+            <div className="flex flex-col gap-5 items-center justify-center h-[90vh]">
+                    <CircleCheck className="text-indigo-800" size={70} />
+                    <h1>Congratulation, your Email has Verifyed</h1>
+                    <Button 
+                    className="w-20 bg-indigo-700 hover:bg-indigo-800 rounded-xl" 
+                    type="submit">
+                        <Link href="/signin" >Sign in</Link> 
+                    </Button>
+            </div>
+        );
     }
 
     return (

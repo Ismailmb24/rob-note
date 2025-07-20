@@ -1,10 +1,25 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { Input } from "./ui/input";
+import { useState } from "react";
 
 export default function SearchForm() {
+    const [query, setQuery] = useState('');
+    const router = useRouter();
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!query.trim()) return;
+        router.replace(`/dictionary?search=${encodeURIComponent(query)}`);
+    };
+
     return (
         <div className="mt-5">
-            <form action="/dictionary" method="GET" className="w-11/12 mx-auto" noValidate autoComplete="off">
+            <form onSubmit={handleSubmit} className="w-11/12 mx-auto" noValidate autoComplete="off">
                 <Input
+                onChange={(e) => setQuery(e.target.value)}
+                value={query}
                 name="search" 
                 type="text" 
                 placeholder="search for word or phrase"

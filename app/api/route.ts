@@ -27,14 +27,6 @@ export async function GET(request: NextRequest) {
         return NextResponse.json([wordMeaning]);
     }
 
-    // //fileter words that are not two letter words
-    // const filteredSearchTerms = searchTerms.filter((term) => term.length > 2);
-    // if (filteredSearchTerms.length === 0) {
-    //     return NextResponse.json({
-    //         error: "No results found.",
-    //     }, { status: 404 });
-    // }
-
     //fetch meaning of each words in the list and return them
     const searchResults = await Promise.all(
         searchTerms.map(async (term) => getWordMeaning(term))
