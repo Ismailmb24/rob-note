@@ -25,7 +25,7 @@ export default function SavedNotesSkeleton() {
                 <SidebarMenuItem 
                 key={i}
                 className={`group/item`}>
-                  <Skeleton className="w-full h-6 my-2" />
+                  <Skeleton className="w-full h-6 my-2 bg-gray-300" />
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

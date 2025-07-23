@@ -1,0 +1,3 @@
+{
+  "ignorePatterns": [".prisma/", "node_modules/", ".next/", "lib/generated/"],
+}

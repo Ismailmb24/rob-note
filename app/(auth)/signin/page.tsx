@@ -85,11 +85,11 @@ export default function Page() {
                         <div className="grid gap-2">
                             <div className="flex justify-between">
                                 <Label htmlFor="password">Password</Label>
-                                <a 
-                                href="#"
+                                <Link
+                                href="/forgot-password"
                                 className="inline-block ml-auto hover:underline text-sm">
                                     Forget password?
-                                </a>
+                                </Link>
                             </div>
                             <Input
                             type="password"

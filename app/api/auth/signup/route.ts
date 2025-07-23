@@ -61,7 +61,7 @@ export async function POST (request: NextRequest) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     await resend.emails.send({
-        from: 'MyApp <onboarding@resend.dev>',
+        from: 'RobNote <noreply@robnote.xyz>',
         to: (newUser?.email) ?? "",
         subject: 'Verify your email',
         html: VerificationEmail(emailVerifyUrl, newUser.email ?? ""),

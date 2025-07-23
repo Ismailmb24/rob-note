@@ -1,8 +1,5 @@
 import { MeaningProps } from "@/components/Definition";
 
-//our model API key
-const apiKey = process.env.MODEL_API_KEY;
-
 export const getWordMeaning = async (wordTerm: string) => {
     //fetch word meaning from the API
     const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordTerm}`);

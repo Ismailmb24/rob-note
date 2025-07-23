@@ -81,7 +81,6 @@ export const getAiCorrection = async ({
                 Text to correct: ${originalText}`
         }],
     }]);
-    console.log("Custommm!!: ", prompt)
 
     const res = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
@@ -94,7 +93,6 @@ export const getAiCorrection = async ({
         }
     );
     const data = await res.json();
-    console.log("real Data!!", data?.candidates);   
 
     if (res.status !== 200) {
         return null;

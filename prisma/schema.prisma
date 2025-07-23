@@ -54,8 +54,10 @@ model User {
   accounts      Account[]
   sessions      Session[]
   noteSessions  NoteSession[]  // Added relation field
-  verificationToken String?
-  verificationExpire DateTime?
+  verificationToken   String?    @map("verification_token")
+  verificationExpire  DateTime?  @map("verification_expire")
+  resetPasswordToken  String?    @map("reset_password_token")
+  resetPasswordExpire DateTime?  @map("reset_password_expire")
 
   @@map("users")
 }

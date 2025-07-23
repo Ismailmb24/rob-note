@@ -51,8 +51,8 @@ export default function OutputConfig({
                     <SelectItem value="Englist">English</SelectItem>
                     <SelectItem value="Arabic">Arabic</SelectItem>
                     <SelectItem value="Hausa">Hausa</SelectItem>
-                    <SelectItem value="Chinese">Chinese</SelectItem>
-                    <SelectItem value="Hindi">Hindie</SelectItem>
+                    <SelectItem value="Igbo">Igbo</SelectItem>
+                    <SelectItem value="Yoruba">Yoruba</SelectItem>
                     <SelectItem value="France">France</SelectItem>
                 </SelectContent>
             </Select>
