@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import useSWR, { SWRConfiguration } from "swr";
 
 type UseFetchResult<T> = {
   data: T | null;
@@ -6,29 +7,12 @@ type UseFetchResult<T> = {
   error: string | null;
 };
 
-export function useFetch<T = unknown>(url: string, options?: RequestInit): UseFetchResult<T> {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+//fetch helper
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-  useEffect(() => {
-    if (!url) return;
+export function useFetch<T = unknown>(url: string, options?: SWRConfiguration): UseFetchResult<T> {
+  const {data, error, isLoading} = useSWR(url, fetcher, options);
 
-    setLoading(true);
-    setError(null);
 
-    fetch(url, options)
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`Error: ${res.status}`);
-        }
-        const json = await res.json();
-        setData(json);
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
-
-  return { data, loading, error };
+  return { data, loading: isLoading, error };
 }

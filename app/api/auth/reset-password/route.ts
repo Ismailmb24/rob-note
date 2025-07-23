@@ -7,6 +7,7 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const password = formData.get("password");
     const token = formData.get("token");
+    console.log("XXXXXXXXXXXXXX", password, token)
 
     //if there is no toke redirect to token = false query
     if (!token) {
@@ -19,9 +20,23 @@ export async function POST(request: NextRequest) {
     const user = await prisma.user.findFirst({
         where: {
             resetPasswordToken: token as string,
-            resetPasswordExpire: {gte: new Date()},
         },
     });
+
+    //if user not found return invalid token
+    if (!user) {
+        return NextResponse.redirect(
+            new URL("/reset-password?token=false", request.nextUrl)
+        ); 
+    }
+
+    //check is token is expired
+    const expiry = user?.resetPasswordExpire;
+    if (expiry && expiry < new Date()) {
+        return NextResponse.redirect(
+            new URL("/reset-password?token=expire", request.nextUrl)
+        ); 
+    }
 
     //encript password
     const hashedPassword = await bcrypt.hash(password as string, 10);
@@ -38,11 +53,11 @@ export async function POST(request: NextRequest) {
 
     //if password doesn't be reseted
     if (!updatedUser) return NextResponse.redirect(
-        new URL("/reset-password?success=false", request.nextUrl)
+        new URL("/reset-password?reset=false", request.nextUrl)
     );
 
     //redirect to token = true query
     return NextResponse.redirect(
-        new URL("/reset-password?success=true", request.nextUrl)
+        new URL("/reset-password?reset=true", request.nextUrl)
     );
 }

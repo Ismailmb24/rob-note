@@ -29,7 +29,7 @@ export default function SavedNotes() {
       setNoteSessions(newNoteSessions);
     }
 
-    const {data, loading:Resloading, error: ResError} = useFetch<NoteSession[]>("http://localhost:3000/api/notesession");
+    const {data, loading:Resloading, error: ResError} = useFetch<NoteSession[]>("/api/notesession");
     useEffect(() => {
         if(data) {
             setNoteSessions(data);

@@ -50,9 +50,11 @@ export default async function AppSidebar() {
         </SidebarMenu>
       </SidebarHeader>
 
+      {/* this is a component that display saved notes */}
       <SavedNotes />
 
       <Separator />
+      
       <SidebarFooter className="py-5">
         <DropdownMenu>
           <DropdownMenuTrigger className="border-0">

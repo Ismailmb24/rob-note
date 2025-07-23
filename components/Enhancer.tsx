@@ -10,12 +10,16 @@ import { NoteTypes } from "@/lib/services/note";
 import { useParams, useRouter } from "next/navigation";
 import { useFetch } from "@/hooks/useFetch";
 import { usePagination } from "@/hooks/use-pagination";
+import useSWR from "swr";
 
 export default function Enhancer() {
 
     const router = useRouter();
     const params = useParams();
     const sessionId = params.id;
+
+    //this is mutate that help to update note session
+    const { mutate } = useSWR(`/api/notesession`);
 
     const [notes, setNotes] = useState<NoteTypes[]>([]); //this hold note list data of current note session
     //this fucntion add note to the state for realtime ui update
@@ -87,6 +91,9 @@ export default function Enhancer() {
         }
         //if the note return seccessfully set it to note state
         onAddNote(noteResponce);
+
+        //add the note to the note session in UI
+        mutate();
 
         //if its in ehancer page and the ehanced text is returned the redirect to it's dynamic route
         if (!sessionId) {

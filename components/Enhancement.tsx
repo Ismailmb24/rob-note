@@ -92,7 +92,7 @@ export default function Enhancement({
                     <div 
                     className="flex gap-2 items-center cursor-pointer"
                     onClick={() => {
-                        copyHtmlToClipboard(htmlString as string);
+                        copyHtmlToClipboard((htmlString as string), (enhancedText as string));
                         setCopied(true);
                         setTimeout(() => {
                             setCopied(false);

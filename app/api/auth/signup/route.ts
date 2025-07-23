@@ -1,6 +1,7 @@
 import { SignUpServerSchema } from "@/lib/validators/auth";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { Resend } from "resend";
 import { VerificationEmail } from "@/components/VerificationEmail";
@@ -27,7 +28,7 @@ export async function POST (request: NextRequest) {
     const hashedPassword = await bcrypt.hash(password, 10);
     
     // this is email verification token and expiry time
-    const token = crypto.randomUUID();
+    const token = crypto.randomBytes(32).toString("hex");
     const expiry = new Date(Date.now() + 1000 * 60 * 60 * 24);
 
     // Here we will try find the user by email

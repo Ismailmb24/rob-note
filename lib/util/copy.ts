@@ -1,13 +1,14 @@
 // lib/utils/copy-to-clipboard.ts
 
-export async function copyHtmlToClipboard(html: string) {
+export async function copyHtmlToClipboard(html: string, text: string) {
   if (!navigator.clipboard || !window.ClipboardItem) {
     console.warn("Clipboard API not supported");
     return;
   }
 
-  const blob = new Blob([html], { type: "text/html" });
-  const clipboardItem = new ClipboardItem({ "text/html": blob });
+  const htmlBlob = new Blob([html], { type: "text/html" });
+  const plainTextBlob = new Blob([text], { type: "text/plain" });
+  const clipboardItem = new ClipboardItem({ "text/html": htmlBlob, "text/plain": plainTextBlob });
 
   try {
     await navigator.clipboard.write([clipboardItem]);

@@ -6,12 +6,11 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
     //This get email from request body
-    const formData = await request.formData();
-    const email = formData.get("email") as string;
+    const {token} = await request.json();
 
     //check if user exists
-    const user = await prisma.user.findUnique({
-        where: { email },
+    const user = await prisma.user.findFirst({
+        where: { resetPasswordToken: token },
     });
 
     //if user not found return invalid email
@@ -20,28 +19,28 @@ export async function POST(request: NextRequest) {
     }
 
     //create token and expire time for reset-password
-    const token = crypto.randomBytes(32).toString("hex");
+    const newToken = crypto.randomBytes(32).toString("hex");
     const expiry = new Date(Date.now() + 1000 * 60 * 60 * 24);
 
     //forgot-password url
-    const resetPasswordUrl = `${process.env.NEXTAUTH_URL}/reset-password?toke=${token}`;
+    const resetPasswordUrl = `/reset-password?toke=${token}`;
 
     //send email to user with reset-password url
     const resend = new Resend(process.env.RESEND_API_KEY);
     
     await resend.emails.send({
         from: "RobNote <noreply@robnote.xyz>",
-        to: email,
+        to: user?.email as string,
         subject: "Reset Password",
-        html: ResetPasswordEmail(resetPasswordUrl, email),
+        html: ResetPasswordEmail(resetPasswordUrl, user?.email as string),
     });
 
     //update user verification token and expiry time
     const updatedUser = await prisma.user.update({
-        where: { email },
+        where: { email: user?.email as string },
         data: {
-            resetPasswordToken: token,
-            resetPasswordExpire: expiry,
+            verificationToken: token,
+            verificationExpire: expiry,
         },
     });
 
