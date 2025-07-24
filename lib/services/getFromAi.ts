@@ -33,7 +33,7 @@ export const getAiWordExamples = async (word: string) => {
                             "example 3"
                         ]
                         }
-                        Now: give me 5 example of sentence with word ${word} only` }],
+                        Now: give me 5 example of sentences with the word delimited by triple quotes """${word}""" only` }],
                 }],
             }),
         }
@@ -65,20 +65,20 @@ export const getAiCorrection = async ({
     const contents = !prompt 
     ? ([{
         parts: [{
-            text: `You are a helpful assistant. Please correct the following text for grammar and spelling in ${language} language, using the ${turn} turn. Respond only with a JSON object in this format:
+            text: `You are a helpful assistant. Please correct the following text delimited by triple quotes for grammar and spelling in "${language}" language, using the "${turn}" turn. Respond only with a JSON object in this format:
                 {
                 "correction": "corrected text in clear and clean markdown format"
                 }
-                Text to correct: ${originalText}`
+                Text to correct: """${originalText}"""`
         }],
     }])
     : ([{
         parts: [{
-            text: `You are a helpful assistant. Please correct the following text for grammar and spelling using this prompt ${prompt}. Respond only with a JSON object in this format:
+            text: `You are a helpful assistant. Please correct the following text delimited by triple quotes for grammar and spelling using this prompt delimited by triple quotes """${prompt}""". Respond only with a JSON object in this format:
                 {
                 "correction": "corrected text in clear and clean markdown format"
                 }
-                Text to correct: ${originalText}`
+                Text to correct: """${originalText}"""`
         }],
     }]);
 

@@ -27,6 +27,8 @@ export async function middleware(request: NextRequest) {
         "/forgot-password", 
         "/reset-password",
         "/verify-email",
+        "/privacy",
+        "/terms",
     ];
 
     // If user is authenticated and tries to access auth pages, redirect them
@@ -47,5 +49,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|logo.png|logo-min.png|public).*)"],
 }

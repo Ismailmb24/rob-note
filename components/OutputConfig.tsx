@@ -38,12 +38,12 @@ export default function OutputConfig({
             <Select name="language" defaultValue="default">
                 <Tooltip>
                     <TooltipTrigger>
-                        <Languages className="h-4 w-4" />
+                        <SelectTrigger> 
+                            <Languages className="h-4 w-4" />
+                        </SelectTrigger>
                     </TooltipTrigger>
                     <TooltipContent>
-                        <SelectTrigger>
-                            <p>Language</p>
-                        </SelectTrigger>
+                        <p>Language</p>
                     </TooltipContent>
                 </Tooltip>
                 
@@ -61,12 +61,12 @@ export default function OutputConfig({
             <Select name="turn" defaultValue="default">
                 <Tooltip>
                     <TooltipTrigger>
-                        <Repeat className="h-4 w-4" />  
+                        <SelectTrigger> 
+                            <Repeat className="h-4 w-4" /> 
+                        </SelectTrigger>
                     </TooltipTrigger>
                     <TooltipContent>
-                        <SelectTrigger>
-                            <p>Turn</p>
-                        </SelectTrigger>
+                        <p>Turn</p>
                     </TooltipContent>
                 </Tooltip>
                 <SelectContent>
