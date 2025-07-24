@@ -77,12 +77,7 @@ export default async function AppSidebar() {
             </div>
           </DropdownMenuTrigger>
           
-          <DropdownMenuContent side="right" className="w-48 mb-10">
-            <DropdownMenuItem>
-              <Moon /> Dark
-            </DropdownMenuItem>
-
-            <DropdownMenuSeparator />
+          <DropdownMenuContent side="top" className="w-48 mb-10">
             <DropdownMenuItem>
               <SignOut />
             </DropdownMenuItem>

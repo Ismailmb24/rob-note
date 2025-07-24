@@ -53,7 +53,6 @@ export const getAiWordExamples = async (word: string) => {
     }
     
     const examples = data?.candidates[0]?.content.parts[0]?.text;
-    console.log("Examples: ", examples)
     const parsedExamples = parseAiResponse(examples);
     if (!parsedExamples || !parsedExamples.examples) {
         return null;

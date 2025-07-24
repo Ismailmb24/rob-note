@@ -88,7 +88,7 @@ export default function Enhancer() {
         });
 
         const noteResponce = await res?.json();
-        console.log("Note correction", noteResponce)
+        
         // if there is no rewsponse message return error
         if (res.status !== 200) {
             setError(true);
