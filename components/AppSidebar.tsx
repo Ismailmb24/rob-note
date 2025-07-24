@@ -1,4 +1,4 @@
-import { ChevronsUpDownIcon, Moon } from "lucide-react"
+import { ChevronsUpDownIcon } from "lucide-react"
 import {
   Sidebar,
   SidebarFooter,
@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { auth } from "@/auth"
-import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuItem, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import SignOut from "./SignOut"
 import { Separator } from "./ui/separator"
 import SidebarNavItem from "./SidebarNavItem"
