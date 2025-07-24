@@ -12,7 +12,7 @@ export default function SignInWithGoogle() {
         variant="outline"
         onClick={() => signIn("google", { 
             redirect: true,
-            redirectTo: "/dictionary" // Redirect to dictionary page after sign in
+            redirectTo: "/enhancer" // Redirect to dictionary page after sign in
          })} // Redirect to home after sign in
         >
             <FaGoogle />

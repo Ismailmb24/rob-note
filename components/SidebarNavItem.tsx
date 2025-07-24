@@ -29,7 +29,7 @@ export default function SidebarNavItem({ item }: {
     return (
         <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild isActive={isActive}>
-                <Link href={item.url} >
+                <Link href={item.url} className="w-full" >
                     {iconsMap[item.icon as keyof typeof iconsMap] && 
                         React.createElement(iconsMap[item.icon as keyof typeof iconsMap], { className: "mr-2" })}
                     <span>{item.title}</span>

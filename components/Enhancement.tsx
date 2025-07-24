@@ -1,5 +1,5 @@
 import { NoteTypes } from "@/lib/services/note";
-import {  Check, Copy, CornerDownRight, Languages, Repeat, Terminal } from "lucide-react";
+import {  Check, Copy, CornerDownRight, Languages, Repeat, Sparkle, Sparkles, Terminal } from "lucide-react";
 import EnhancementSkeleton from "./EnhancementSkeleton";
 import { marked } from "marked";
 import { copyHtmlToClipboard } from "@/lib/util/copy";
@@ -43,6 +43,13 @@ export default function Enhancement({
         <div className="text-center mt-10 flex flex-col justify-center items-center h-[80vh]">
             <h1 className="text-2xl font-bold">Something went bad</h1>
             <p className="text-gray-500">Please try again later.</p>
+        </div>
+    );
+
+    if (!notes?.length) return (
+        <div className="text-center mt-10 flex flex-col justify-center items-center h-[80vh]">
+            <Sparkles className="w-32 h-32 text-gray-500 mb-4" />
+            <p className="text-gray-500">Enter your note to get started </p>
         </div>
     );
 

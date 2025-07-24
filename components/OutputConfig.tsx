@@ -36,16 +36,17 @@ export default function OutputConfig({
     return (
         <div className="flex gap-5">
             <Select name="language" defaultValue="default">
-                <SelectTrigger>
-                    <Tooltip>
-                        <TooltipTrigger>
-                            <Languages className="h-4 w-4" />
-                        </TooltipTrigger>
-                        <TooltipContent>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <Languages className="h-4 w-4" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <SelectTrigger>
                             <p>Language</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </SelectTrigger>
+                        </SelectTrigger>
+                    </TooltipContent>
+                </Tooltip>
+                
                 <SelectContent>
                     <SelectItem value="Default">Default</SelectItem>
                     <SelectItem value="Englist">English</SelectItem>

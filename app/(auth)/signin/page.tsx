@@ -45,7 +45,7 @@ export default function Page() {
         const res = await signIn("credentials", {
             ...data,
             redirect: true, // Always use a literal true or false
-            redirectTo: "/ehancer",
+            redirectTo: "/enhancer",
         }) as SignInResponse | undefined;
     }
 
