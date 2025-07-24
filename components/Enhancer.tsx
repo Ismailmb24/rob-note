@@ -113,7 +113,7 @@ export default function Enhancer() {
     return (
         <main className="w-full flex flex-col lg:flex-row">
             <div className="flex flex-col w-full lg:w-2/3">
-                <div className="text-slate-800">
+                <div className="text-slate-800 mb-40">
                     <Enhancement
                     notes={notes}
                     loading={loading || savedNoteLoading}
