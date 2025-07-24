@@ -36,16 +36,16 @@ export default function OutputConfig({
     return (
         <div className="flex gap-5">
             <Select name="language" defaultValue="default">
-                <Tooltip>
-                    <TooltipTrigger>
-                        <SelectTrigger> 
+                <SelectTrigger >
+                    <Tooltip>
+                        <TooltipTrigger asChild>
                             <Languages className="h-4 w-4" />
-                        </SelectTrigger>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>Language</p>
-                    </TooltipContent>
-                </Tooltip>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Language</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </SelectTrigger>
                 
                 <SelectContent>
                     <SelectItem value="Default">Default</SelectItem>
@@ -59,16 +59,16 @@ export default function OutputConfig({
             </Select>
 
             <Select name="turn" defaultValue="default">
-                <Tooltip>
-                    <TooltipTrigger>
-                        <SelectTrigger> 
+                <SelectTrigger>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
                             <Repeat className="h-4 w-4" /> 
-                        </SelectTrigger>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>Turn</p>
-                    </TooltipContent>
-                </Tooltip>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Turn</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </SelectTrigger>
                 <SelectContent>
                     <SelectItem value="Default">Default</SelectItem>
                     <SelectItem value="Formal">Formal</SelectItem>

@@ -25,15 +25,23 @@ export const getAiWordExamples = async (word: string) => {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 contents: [{
-                    parts: [{ text: `Respond in the following JSON format:
+                    parts: [{ 
+                        text: `Respond with a JSON object in the following format:
+
                         {
                         "examples": [
-                            "example 1",
-                            "example 2",
-                            "example 3"
+                            "Example sentence 1.",
+                            "Example sentence 2.",
+                            "Example sentence 3.",
+                            "Example sentence 4.",
+                            "Example sentence 5."
                         ]
                         }
-                        Now: give me 5 example of sentences with the word delimited by triple quotes """${word}""" only` }],
+
+                        Give 5 distinct and natural-sounding example sentences using the word """${word}""".
+                        Use the word in different contexts or sentence structures.
+                        Only return valid JSON — do not include any additional commentary or explanation.` 
+                    }],
                 }],
             }),
         }
@@ -45,6 +53,7 @@ export const getAiWordExamples = async (word: string) => {
     }
     
     const examples = data?.candidates[0]?.content.parts[0]?.text;
+    console.log("Examples: ", examples)
     const parsedExamples = parseAiResponse(examples);
     if (!parsedExamples || !parsedExamples.examples) {
         return null;
