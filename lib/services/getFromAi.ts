@@ -73,11 +73,18 @@ export const getAiCorrection = async ({
     const contents = !prompt 
     ? ([{
         parts: [{
-            text: `You are a helpful assistant. Please correct the following text delimited by triple quotes for grammar and spelling in "${language}" language, using the "${turn}" turn. Respond only with a JSON object in this format:
-                {
-                "correction": "corrected text in clear and clean markdown format"
-                }
-                Text to correct: """${originalText}"""`
+            text: `You are a helpful and precise assistant.
+
+            Your task is to correct grammar and spelling and also translation in the following text, which is delimited by triple quotes (""").
+
+            Respond **only** with a valid JSON object using this format:
+
+            {
+            "correction": "Corrected version of the text, cleanly formatted in markdown."
+            }
+
+           correct this text: """${originalText}""" in ${language} language. using ${turn} turn.
+           make sure to restrict yourself to provide the response in JSON format.`
         }],
     }])
     : ([{

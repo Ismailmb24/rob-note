@@ -55,8 +55,11 @@ export default function Enhancement({
     return (
         <>
             {enhancedText && <div className="w-full p-5">
-                <div className="w-4/5 flex gap-2 font-light relative right-0 text-sm text-gray-500 mb-10">
-                    <CornerDownRight size={16} className="w-32" /> 
+                <div className="w-4/5 flex gap-2 font-light text-sm text-gray-500 mb-10">
+                    <div className="w-32">
+                        <CornerDownRight size={16} />
+                    </div>
+                     
                     <div>
                         <ExpandableText text={originalText as string} maxLength={200} />
                         {
