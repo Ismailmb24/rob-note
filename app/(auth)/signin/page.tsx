@@ -12,15 +12,12 @@ import { signIn, SignInResponse } from "next-auth/react";
 import { useEffect } from "react";
 import { Toaster } from "sonner";
 import { toast } from "sonner";
-import { redirectIfAuth } from "@/lib/redirect-if-auth";
 import { useSearchParams } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 
 export default function Page() {
     // This page is public and does not require authentication
     // So we don't need it while the user is signed in
-    // This redirect user if he is already signed in
-    redirectIfAuth();
 
     // Get sign in error
     // This look for error in page params
@@ -37,12 +34,12 @@ export default function Page() {
 
     useEffect(() => {
         if (authError) toast.error(errorMessage);
-    }, [authError]);
+    }, [authError, errorMessage]);
 
     // Function to handle sign-in
     const onSignIn = async (data: signInInput) => {
         // Call the signIn function from next-auth with credentials provider
-        const res = await signIn("credentials", {
+        await signIn("credentials", {
             ...data,
             redirect: true, // Always use a literal true or false
             redirectTo: "/enhancer",
@@ -110,7 +107,7 @@ export default function Page() {
                    <SignInWithGoogle />
 
                     <p className="text-sm text-center">
-                        Don't have an account?  
+                        Don&apos;t have an account?  
                         <Link href="/signup" className="text-sm hover:underline"> Sign up</Link>
                     </p>
                 </CardFooter>

@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     }
 
     //update user verification token and expiry time
-    const updatedUser = await prisma.user.update({
+    await prisma.user.update({
         where: { email },
         data: {
             verificationToken: token,

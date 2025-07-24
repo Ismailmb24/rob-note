@@ -1,5 +1,5 @@
 import { NoteTypes } from "@/lib/services/note";
-import {  Check, Copy, CornerDownRight, Languages, Repeat, Sparkle, Sparkles, Terminal } from "lucide-react";
+import {  Check, Copy, CornerDownRight, Languages, Repeat, Sparkles, Terminal } from "lucide-react";
 import EnhancementSkeleton from "./EnhancementSkeleton";
 import { marked } from "marked";
 import { copyHtmlToClipboard } from "@/lib/util/copy";
@@ -17,10 +17,6 @@ export default function Enhancement({
     loading: boolean,
     error: boolean
 }) {
-
-    //if loading return loading ui
-    if (loading) return <EnhancementSkeleton />
-
     //this control note list for pagination navigation
     const {
         current,
@@ -34,6 +30,9 @@ export default function Enhancement({
 
     //this is copied that help displayed copy to user when he click copy icon
     const [copied, setCopied] = useState<boolean>(false);
+
+    //if loading return loading ui
+    if (loading) return <EnhancementSkeleton />
 
     //ready to copy 
     //this make our ehanced text html string sweetable to use in different apps as formatted text

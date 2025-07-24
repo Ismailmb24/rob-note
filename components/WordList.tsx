@@ -1,6 +1,6 @@
 import WordCard from "@/components/WordCard";
 import { MeaningProps } from "./Definition";
-import { FileWarning, FileWarningIcon, Search } from "lucide-react";
+import { FileWarning, Search } from "lucide-react";
 
 export interface item {
     word: string;

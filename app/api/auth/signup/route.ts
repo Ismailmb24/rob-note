@@ -70,10 +70,11 @@ export async function POST (request: NextRequest) {
 
     // Return the created user data
     return NextResponse.json({
-        ok: 200,
         user: {
             id: newUser.id,
             email: newUser.email,
         }
+    }, {
+        status: 200,
     }); 
 }

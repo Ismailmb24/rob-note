@@ -5,11 +5,9 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { redirectIfAuth } from "@/lib/redirect-if-auth";
 import { signUpInput, SignUpSchema } from "@/lib/validators/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleCheck, Mail } from "lucide-react";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -19,13 +17,11 @@ import { toast, Toaster } from "sonner";
 export default function Page() {
     // This page is public and does not require authentication
     // So we don't need it while the user is signed in
-    // This redirect user if he is already signed in
-    redirectIfAuth();
+
 
     const [ authError, setAuthError ] = useState<string | null>(null);
     const searchParams = useSearchParams();
     const verification = searchParams.get("verification");
-    console.log("verify: ", verification);
     
 
     const {
@@ -53,7 +49,7 @@ export default function Page() {
             }
         });
 
-        if (!res?.ok) {
+        if (res.status !== 200) {
             // Handle error
             const error = await res.json();
             setAuthError(error.error);
@@ -61,18 +57,8 @@ export default function Page() {
             return;
         }
 
-        // Sign up successful
-        const user = await res.json();
-
         //redirect user to email verification message page
         redirect("/signup?verification=pending");
-        // // Automatically sign in the user after successful sign-up
-        // signIn("credentials", {
-        //     email: email,
-        //     password: password,
-        //     redirect: true,
-        //     redirectTo: "/dictionary"
-        // });
     }
 
     if(verification === "pending") {

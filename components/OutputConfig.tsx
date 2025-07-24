@@ -59,16 +59,16 @@ export default function OutputConfig({
             </Select>
 
             <Select name="turn" defaultValue="default">
-                <SelectTrigger>
-                    <Tooltip>
-                        <TooltipTrigger>
-                            <Repeat className="h-4 w-4" />  
-                        </TooltipTrigger>
-                        <TooltipContent>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <Repeat className="h-4 w-4" />  
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <SelectTrigger>
                             <p>Turn</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </SelectTrigger>
+                        </SelectTrigger>
+                    </TooltipContent>
+                </Tooltip>
                 <SelectContent>
                     <SelectItem value="Default">Default</SelectItem>
                     <SelectItem value="Formal">Formal</SelectItem>
@@ -76,13 +76,11 @@ export default function OutputConfig({
                 </SelectContent>
             </Select>
             
-                <Tooltip>
+            <Tooltip>
                 <TooltipTrigger>
                     <Terminal className="h-4 w-4" onClick={() => {setCustomPrompt(true)}} />
                 </TooltipTrigger>
-                <TooltipContent
-                
-                >
+                <TooltipContent>
                     <p>Custom prompt</p>
                 </TooltipContent>
             </Tooltip>

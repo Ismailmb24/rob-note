@@ -21,7 +21,7 @@ export default function SavedNotesSkeleton() {
           <SidebarGroupLabel>Notes</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {noteSessions?.map((noteSession: any, i: number) => (
+              {noteSessions?.map((noteSession: [], i: number) => (
                 <SidebarMenuItem 
                 key={i}
                 className={`group/item`}>

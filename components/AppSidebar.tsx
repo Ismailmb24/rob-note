@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { auth } from "@/auth"
-import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "./ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import SignOut from "./SignOut"
 import { Separator } from "./ui/separator"
 import SidebarNavItem from "./SidebarNavItem"

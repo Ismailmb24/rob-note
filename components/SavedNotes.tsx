@@ -23,9 +23,8 @@ export default function SavedNotes() {
   // this will update the active state when the URL changes
   const activePath = usePathname();
 
+  //this hold note list data of current note session
   const [noteSessions, setNoteSessions] = useState<NoteSession[]>();
-  const [loading, setLoading] = useState<boolean>();
-  const [error, setError] = useState<boolean>();
 
   //handle note session state deletion for ui effect or realtime chage
   const onDelete = (id: string) => {
@@ -35,16 +34,24 @@ export default function SavedNotes() {
     setNoteSessions(newNoteSessions);
   }
 
-  const { data, loading: Resloading, error: ResError } = useFetch<NoteSession[]>("/api/notesession");
+  //fetch notesession / saved notes from api to display in sidebar
+  const { data, loading, error } = useFetch<NoteSession[]>("/api/notesession");
+
+  //update notesession state for ui effect
   useEffect(() => {
     if (data) {
       setNoteSessions(data);
-      setLoading(Resloading);
-      setError(!!ResError);
     }
   }, [data]);
 
-  if (!data) return <SavedNotesSkeleton />
+  //if loading show a loading ui
+  if (loading) return <SavedNotesSkeleton />
+
+  if (error) return (
+    <div className="flex flex-col justify-center items-center gap-5">
+      <p className="text-slate-900">Failed to load notes</p>
+    </div>
+  );
 
   return (
     <SidebarContent>
@@ -52,7 +59,7 @@ export default function SavedNotes() {
         <SidebarGroupLabel>Notes</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
-            {noteSessions?.map((noteSession: any) => (
+            {noteSessions?.map((noteSession: NoteSession) => (
               <SidebarMenuItem
                 key={noteSession.id}
                 className={`group/item`}>

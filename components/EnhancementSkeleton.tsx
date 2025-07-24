@@ -1,11 +1,4 @@
-import { NoteTypes } from "@/lib/services/note";
-import {  CornerDownRight, Languages, Loader, Repeat, Terminal } from "lucide-react";
 import { Skeleton } from "./ui/skeleton";
-
-interface EnhancementProps extends Omit<NoteTypes, never> {
-    loading: boolean;
-    error: boolean;
-}
 
 export default function EnhancementSkeleton() {
     return (

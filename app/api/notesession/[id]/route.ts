@@ -16,6 +16,5 @@ export async function GET(
         include: {notes: true},
     });
      
-    console.log("NoteSession: ", noteSession);
     return NextResponse.json(noteSession);
 }

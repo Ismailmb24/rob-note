@@ -9,8 +9,12 @@ import Enhancement from "./Enhancement";
 import { NoteTypes } from "@/lib/services/note";
 import { useParams, useRouter } from "next/navigation";
 import { useFetch } from "@/hooks/useFetch";
-import { usePagination } from "@/hooks/use-pagination";
 import useSWR from "swr";
+import { NoteSession } from "@/lib/generated/prisma";
+
+export type NoteSessionWithNotes = NoteSession & {
+    notes: NoteTypes[];
+}
 
 export default function Enhancer() {
 
@@ -42,11 +46,11 @@ export default function Enhancer() {
         data, 
         loading: savedNoteLoading, 
         error: savedNoteError 
-    } = useFetch<any>(`/api/notesession/${sessionId}`);
+    } = useFetch<NoteSessionWithNotes>(`/api/notesession/${sessionId}`);
 
     // update notes state with the saved note data
     useEffect(() => {
-        setNotes(data?.notes); 
+        setNotes(data?.notes ?? []); 
     }, [data]);
 
      // save each character type in textarea on formvalue state
