@@ -57,7 +57,7 @@ export async function POST (request: NextRequest) {
     });
 
     //email verification page url
-    const emailVerifyUrl = `${process.env.NEXTAUTH_URL}/verify-email?token=${token}`;
+    const emailVerifyUrl = `${process.env.ORIGIN_URL}/verify-email?token=${token}`;
 
     const resend = new Resend(process.env.RESEND_API_KEY);
 

@@ -65,6 +65,7 @@ export default function Enhancer() {
         e.preventDefault();
         setLoading(true);
         setFormValue("");
+        setCustomPromptValue("");
 
         const form = e.currentTarget as HTMLFormElement;
         const formData = new FormData(form);
@@ -141,6 +142,7 @@ export default function Enhancer() {
                     <div className="flex justify-between mt-5 items-center">
                         <OutputConfig
                         isCustomPrompt={isCustomPrompt}
+                        customPromptValue={customPromptValue ?? ""}
                         setCustomPrompt={setCustomPrompt}
                         setCustomPromptValue={setCustomPromptValue} />
                         <div>

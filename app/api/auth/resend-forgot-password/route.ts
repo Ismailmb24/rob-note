@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     const expiry = new Date(Date.now() + 1000 * 60 * 60 * 24);
 
     //forgot-password url
-    const resetPasswordUrl = `/reset-password?toke=${token}`;
+    const resetPasswordUrl = `${process.env.ORIGIN_URL}/reset-password?toke=${token}`;
 
     //send email to user with reset-password url
     const resend = new Resend(process.env.RESEND_API_KEY);

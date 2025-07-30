@@ -10,7 +10,7 @@ export interface item {
 
 export default async function WordSearchResult({ search }: { search: string }) {
   // This component is used to display the search results for a word search.
-    const res = await fetch(`${process.env.MY_API_URL}?search=${search}`);
+    const res = await fetch(`${process.env.ORIGIN_URL}/api?search=${search}`);
     const data = await res.json();
 
     if (res.status !== 200 ) {

@@ -7,10 +7,12 @@ import { Textarea } from "./ui/textarea";
 
 export default function OutputConfig({
     isCustomPrompt,
+    customPromptValue,
     setCustomPrompt = () => {},
     setCustomPromptValue = () => {}
 }: {
     isCustomPrompt: boolean,
+    customPromptValue?: string,
     setCustomPrompt?: (val: boolean) => void,
     setCustomPromptValue?: (val: string) => void
 }) {
@@ -25,6 +27,7 @@ export default function OutputConfig({
             name="prompt"
             className="h-10 resize-none"
             placeholder="Enter Custom Prompt..."
+            value={customPromptValue}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                 setCustomPromptValue(e.target.value);
             }}

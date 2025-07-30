@@ -91,6 +91,7 @@ model Note {
   prompt        String?
   sessionId     String       @map("session_id")
   session       NoteSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  createdAt     DateTime     @default(now()) @map("created_at")
 
   @@map("notes")
 }

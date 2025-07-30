@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rob-Dic",
-  description: "An AI-powered dictionary and grammar enhancer",
+  title: "Rob-Note",
+  description: "An AI-powered dictionary and grammar enhancer and translator for your notes",
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",

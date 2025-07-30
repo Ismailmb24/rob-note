@@ -7,7 +7,6 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const password = formData.get("password");
     const token = formData.get("token");
-    console.log("XXXXXXXXXXXXXX", password, token)
 
     //if there is no toke redirect to token = false query
     if (!token) {
