@@ -11,7 +11,7 @@ export default async function Page({ params }: { params: Promise<{ word: string 
     const { word } = await params;
     
     // Fetch the word data from the API
-    const res = await fetch(`${process.env.MY_API_URL}/${word}`);
+    const res = await fetch(`${process.env.ORIGIN_URL}/api?word=${word}`);
     const data = await res.json();
 
     return (
