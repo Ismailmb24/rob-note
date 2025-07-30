@@ -17,11 +17,15 @@ export default function Header() {
             </div>
             <div className="flex items-center gap-4">
               <Button
-              className="border-2 border-indigo-500 rounded-xl hover:bg-white" 
-              variant="outline" size="lg">
+              className="w-22 border-2 border-indigo-500 rounded-xl hover:bg-white" 
+              variant="outline" 
+              size="lg" 
+              asChild>
                 <Link href="/signin">Login</Link>
               </Button>
-              <Button className="bg-indigo-500 hover:bg-indigo-700 rounded-xl" size="lg">
+              <Button className="w-20 bg-indigo-500 hover:bg-indigo-700 rounded-xl" 
+              size="lg" 
+              asChild>
                 <Link href="/signup">Sign up</Link>
               </Button>
             </div>

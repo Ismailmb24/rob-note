@@ -55,6 +55,7 @@ export default async function AppSidebar() {
 
       <Separator />
       
+      {/* this a side bar footer where it show user's avatar*/}
       <SidebarFooter className="py-5">
         <DropdownMenu>
           <DropdownMenuTrigger className="border-0">

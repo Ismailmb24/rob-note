@@ -33,9 +33,9 @@ export default function Examples({ word, toggle }: { word: string, toggle: boole
     );
 
     if (error) return (
-        <div className="text-center mt-10 flex flex-col justify-center items-center">
-            <h1 className="text-2xl font-bold">Something went bad</h1>
-            <p className="text-gray-500">Please try again later.</p>
+        <div className="text-center text-sm italic mt-10 flex flex-col justify-center items-center  h-[25vh]">
+            <h1>Something went bad !!!</h1>
+            <p className="text-gray-500">try again.</p>
         </div>
     );
     

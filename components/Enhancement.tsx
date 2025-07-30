@@ -39,9 +39,9 @@ export default function Enhancement({
     const htmlString = marked?.parse((enhancedText as string) || "");
 
     if (error) return (
-        <div className="text-center mt-10 flex flex-col justify-center items-center h-[80vh]">
-            <h1 className="text-2xl font-bold">Something went bad</h1>
-            <p className="text-gray-500">Please try again later.</p>
+        <div className="text-center mt-10 flex flex-col justify-center items-center text-sm italic h-[80vh]">
+            <h2>Something went bad !!!</h2>
+            <p className="text-gray-500">try again</p>
         </div>
     );
 

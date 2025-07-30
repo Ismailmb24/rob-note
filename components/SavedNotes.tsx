@@ -23,6 +23,9 @@ export default function SavedNotes() {
   // this will update the active state when the URL changes
   const activePath = usePathname();
 
+  //this function will check if note is active
+  const isActive = (path: string) => activePath.includes(`/enhancer/${path}`);
+
   //this hold note list data of current note session
   const [noteSessions, setNoteSessions] = useState<NoteSession[]>();
 
@@ -48,8 +51,8 @@ export default function SavedNotes() {
   if (loading) return <SavedNotesSkeleton />
 
   if (error) return (
-    <div className="flex flex-col justify-center items-center gap-5">
-      <p className="text-slate-900">Failed to load notes</p>
+    <div className="flex flex-col justify-center items-center text-sm italic gap-5 h-screen">
+      <p className="text-slate-900">Failed to load notes !!!</p>
     </div>
   );
 
@@ -64,12 +67,15 @@ export default function SavedNotes() {
                 key={noteSession.id}
                 className={`group/item`}>
                 <SidebarMenuButton
-                isActive={activePath.includes(`/enhancer/${noteSession.id}`)}  >
+                isActive={isActive(noteSession.id)}  >
                   <Link href={`/enhancer/${noteSession.id}`} className="w-full">
                     {noteSession.title}
                   </Link>
                 </SidebarMenuButton>
-                <DeleteNote id={noteSession.id} onDeleteNoteSession={onDelete} />
+                <DeleteNote 
+                id={noteSession.id} 
+                onDeleteNoteSession={onDelete}
+                isActive={isActive} />
               </SidebarMenuItem>
             ))}
           </SidebarMenu>

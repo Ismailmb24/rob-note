@@ -121,13 +121,12 @@ export default function Enhancer() {
                     error={error || !!savedNoteError} />
                 </div>
             </div>
-            
+                    
+            <div className="flex w-full lg:w-[26%] lg:h-screen fixed bottom-1 lg:right-0 bg-white">
             <div>
                 <Separator orientation="vertical"/>
             </div>
-            
-            <div className="flex flex-col w-full lg:w-[26%] lg:h-screen fixed bottom-1 lg:right-0 bg-white">
-                <form 
+            <form 
                 action="/" 
                 onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
                     handleFormSubmission(e, sessionId as string);

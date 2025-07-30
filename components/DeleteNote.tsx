@@ -7,10 +7,12 @@ import { deleteNote } from "@/lib/services/note";
 export default function DeleteNote(
     {
         id,
-        onDeleteNoteSession = () => {}
+        onDeleteNoteSession = () => {},
+        isActive,
     }: {
         id: string, 
-        onDeleteNoteSession: (id: string) => void
+        onDeleteNoteSession: (id: string) => void,
+        isActive: (path: string) => boolean
     }
 ) {
     //handle note session deletion in database
@@ -34,7 +36,7 @@ export default function DeleteNote(
     
     return (
         <SidebarMenuAction 
-        className={`hidden group-hover/item:block`}
+        className={`hidden group-hover/item:block ${isActive(id) ? "block" : "hidden"}`}
         onClick={() => { 
             handleDelete(id);
         }}>
